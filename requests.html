@@ -1,0 +1,105 @@
+<html><head>
+      <meta charset="UTF-8">
+      <title>Hello World!</title>
+      <style>
+         div{
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 20px;
+         }
+         table,td,th{
+            border:1px solid #000;
+            border-collapse: collapse;
+            padding: 10px;
+         }
+      </style>
+   
+   </head>
+   <body>
+     
+      <div style="
+    font-family: fantasy;
+">
+<a href="/">Home</a>
+   <h1>Files</h1>
+   <table>
+      <tr>
+         <th>Filename</th>
+         <th>Description</th>
+         <th>Author</th>
+         <th>Hash</th>
+         <th>Size</th>
+         <th>Date</th>
+         <th>Requested by</th>
+         <th>Action</th>
+      </tr>
+      <script>
+         const call = async ()=>{
+         let response = await fetch("/requests/api");
+         let files = await response.json();
+         console.log(files);
+         files.forEach(file=>{
+            let tr=document.createElement('tr');
+            let td,text;
+
+            td=document.createElement('td');
+            text = document.createTextNode(file.title);
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            text = document.createTextNode(file.description);
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            text = document.createTextNode(file.author);
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            text = document.createTextNode(file.hash);
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            text = document.createTextNode(file.size+" bytes");
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            text = document.createTextNode(new Date(file.date).toString());
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            text = document.createTextNode(file.requestedBy);
+            td.append(text);
+            tr.append(td);
+
+            td=document.createElement('td');
+            a = document.createElement('a');
+            a.href="/download/"+file.hash;
+            text = document.createTextNode("Download");
+            a.appendChild(text);
+            td.appendChild(a);
+            a = document.createElement('a');
+            a.href="/grant/"+file.requestedBy+"/"+file.hash;
+            text = document.createTextNode("Grant");
+            a.appendChild(text);
+            td.appendChild(a);
+            tr.appendChild(td);
+
+            document.querySelector("table").appendChild(tr);
+
+
+         })
+         }
+         call();
+      </script>
+   </table>
+</div>
+</body></html>
