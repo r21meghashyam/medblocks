@@ -1,0 +1,117 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello World!</title>
+   <style>
+      body {
+         font-family: fantasy;
+         margin: 0px;
+         background: #ccc;
+      }
+
+      .profileContainer {
+         display: flex;
+         height: 100vh;
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+      }
+
+      .header {
+         background: #999;
+         color: #fff;
+         font-size: 3em;
+         text-align: center;
+         padding: 10px;
+      }
+
+      .profile {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         background: #bbb;
+         padding: 20px;
+         margin: 20px;
+         transition: background-color 0.5s;
+         color: #fff;
+      }
+
+      .profile img {
+         width: 200px;
+      }
+
+      a {
+         color: #fff;
+         text-decoration: none;
+      }
+
+      form div {
+         padding: 20px;
+      }
+
+      input,
+      textarea {
+         width: 100%;
+         font-size: 20px;
+         padding: 10px;
+         background-color: #ccc;
+         border: none;
+         outline: none;
+         color: #fff;
+      }
+
+      button {
+         padding: 20px;
+         font-size: 1.5em;
+         margin: 20;
+         background: #999;
+         border: 0px;
+         border-radius: 5px;
+         color: #fff;
+         outline: none;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="header">
+      <a href="/">Medblocks</a>
+   </div>
+   <div class="profileContainer">
+      <div class="profile">
+         <form method="post">
+            <div>
+               Enter aadhar number:
+               <input type="text" name="aadharNumber">
+            </div>
+            <div style="text-align: center">
+               <button>Register</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</body>
+<script>
+   window.onload = async () => {
+
+      let input = document.querySelector("input");
+      if (!input)
+         return;
+      let button = document.querySelector("button");
+      button.disabled = true;
+      input.addEventListener('change', (event) => {
+         let value = event.target.value;
+         if (!value.match(/\d{4}-\d{4}-\d{4}-\d{4}/))
+            alert("Invalid Aadhar Number!");
+         else
+            button.disabled = false;
+      });
+
+   }
+
+</script>
+
+</html>

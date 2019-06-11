@@ -1,0 +1,5 @@
+data
+temp
+node_modules
+.vscode
+firebase-config.js

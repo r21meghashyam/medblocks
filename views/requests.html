@@ -1,0 +1,144 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello World!</title>
+   <style>
+      body {
+         font-family: fantasy;
+         margin: 0px;
+         background: #ccc;
+      }
+
+      .profileContainer {
+         display: flex;
+         height: 100vh;
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+      }
+
+      .header {
+         background: #999;
+         color: #fff;
+         font-size: 3em;
+         text-align: center;
+         padding: 10px;
+      }
+
+      a {
+         color: #fff;
+         text-decoration: none;
+      }
+
+      .tile>a>img {
+         width: 128px;
+         padding: 20px;
+         transition: transform 0.5s ease-out;
+      }
+
+      .tile:hover {
+         background: #999;
+      }
+
+      .tile:hover>a>img {
+         transform: scale(1.2, 1.2);
+      }
+
+      .list {
+         display: flex;
+         flex-wrap: wrap;
+         min-height: 100vh;
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+
+      }
+
+      .tile>a {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .tile {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         background-color: #bbb;
+         padding: 20px;
+         margin: 20px;
+         transition: background-color 0.5s;
+         color: #fff;
+         cursor: pointer;
+      }
+
+      .options img {
+         width: 32px;
+         padding: 0px 20px;
+         transition: transform 0.5s;
+      }
+
+      .options img:hover {
+         transform: scale(1.2, 1.2);
+      }
+
+      small {
+         font-size: 10px;
+         color: #ddd;
+      }
+   </style>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+   <script src="js/peer.js"></script>
+   <script src="js/firebase-config.js"></script><script src="js/script.js"></script>
+
+</head>
+
+<body>
+   <div class="header">
+      <a href="/">Medblocks</a>
+   </div>
+   <div class="list">
+   </div>
+
+   <script>
+      const main = async () => {
+         let files = await(await fetch("api/requests")).json();
+         let user = await(await fetch("me")).text();
+        
+         
+         files.forEach(file => {
+            let tile = `
+            <div class="tile">
+            <a href="view/${file.hash}">
+               <img src="images/file.png" />
+               ${file.title}
+               <small>${file.size} bytes</small>
+            </a>
+            <div>
+               <small>Requested by:</small>
+               <div>${file.requestedBy}</div>
+            </div>
+            <div class="options">
+                  <a href="/download/${file.hash}" title="View"><img src="images/view.png" /></a>
+                  <a href="/grant/${file.requestedBy}/${file.hash}" title="Grant"><img src="images/grant.png" /></a>
+            </div>
+            </div>
+            `;
+            document.querySelector('.list').innerHTML += tile;
+         });
+         if (files.length == 0)
+            document.querySelector('.list').innerHTML = `<div class="tile">No files</div>`;
+      }
+      main();
+
+   </script>
+
+</body>
+
+</html>

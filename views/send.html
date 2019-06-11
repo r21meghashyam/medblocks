@@ -1,0 +1,156 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello World!</title>
+   <style>
+         body {
+            font-family: fantasy;
+            margin: 0px;
+            background: #ccc;
+         }
+   
+         .profileContainer {
+            display: flex;
+            
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            font-size: 20px;
+         }
+   
+         .header {
+            background: #999;
+            color: #fff;
+            font-size: 3em;
+            text-align: center;
+            padding: 10px;
+         }
+   
+         .profile {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #bbb;
+            padding: 20px;
+            margin: 20px;
+            transition: background-color 0.5s;
+            color: #fff;
+         }
+   
+       
+   
+         a {
+            color: #fff;
+            text-decoration: none;
+         }
+   
+         form div {
+            padding: 20px;
+         }
+   
+         input,
+         textarea {
+            min-width: 500px;
+            font-size: 20px;
+            padding: 10px;
+            background-color: #ccc;
+            border: none;
+            outline: none;
+            color: #fff;
+         }
+   
+         .tile>img {
+            width: 128px;
+            padding: 20px;
+            transition: transform 0.5s ease-out;
+         }
+   
+         .tile:hover {
+            background: #999;
+         }
+   
+         .tile:hover>img {
+            transform: scale(1.2, 1.2);
+         }
+   
+         .list {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 50vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            font-size: 20px;
+   
+         }
+   
+         .tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
+   
+         .tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #bbb;
+            padding: 20px;
+            margin: 20px;
+            transition: background-color 0.5s;
+            color: #fff;
+            cursor: pointer;
+         }
+       
+   
+         .options img:hover {
+            transform: scale(1.2, 1.2);
+         }
+   
+         small {
+            font-size: 10px;
+            color: #ddd;
+         }
+         button{
+            border:none;
+            background: none;
+            outline: none;
+            vertical-align: middle;
+         }
+         button img{
+            width:64px;
+         }
+      </style>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+   <script src="js/peer.js"></script>
+   <script src="js/firebase-config.js"></script><script src="js/script.js"></script>
+</head>
+
+<body>
+
+      <div class="header">
+            <a href="/">Medblocks</a>
+         </div>
+         <div class="profileContainer">
+            <div class="profile">
+   <form method="post">
+
+         Enter aadhar number:
+         <input type="text" name="aadharNumber" style="
+    outline: none;
+    text-align: center;
+    padding: 5px;
+    font-family: fantasy;
+    font-size: 2em;
+">
+         <button><img src="/images/send_button.png"></button>
+   </form>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello World!</title>
+   <style>
+      body {
+         font-family: fantasy;
+         margin: 0px;
+         background: #ccc;
+      }
+
+      .list {
+         display: flex;
+         flex-wrap: wrap;
+         min-height: 100vh;
+         
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+
+      }
+
+      .header {
+         background: #999;
+         color: #fff;
+         font-size: 3em;
+         text-align: center;
+         padding: 10px;
+      }
+
+      .tile {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         background-color: #bbb;
+         padding: 20px;
+         margin:20px;
+         transition: background-color 0.5s;
+      }
+      .tile img{
+         width: 128px;
+         padding:20px;
+         transition: transform 0.5s ease-out;
+      }
+      .tile:hover{
+         background: #999;
+      }
+      .tile:hover img{
+         transform: scale(1.2,1.2);
+      }
+      a {
+         color: #fff;
+         text-decoration: none;
+      }
+   </style>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+   <script src="js/peer.js"></script>
+   <script src="js/firebase-config.js"></script><script src="js/script.js"></script>
+</head>
+
+<body>
+   <div class="header">
+      Medblocks
+   </div>
+   <div class="list">
+      <a href="/list">
+         <div class="tile">
+            <img src="images/hard-disc.png" />
+            List my files
+         </div>
+      </a>
+      <a href="/upload">
+         <div class="tile">
+            <img src="images/file-upload.png" />
+            Upload file
+         </div>
+      </a>
+     
+      <a href="/requests">
+         <div class="tile">
+               <img src="images/request.png" />
+               Requests
+            </div>
+      </a>
+      <a href="/search">
+         <div class="tile">
+               <img src="images/search.png" />
+               Search by aadhar number
+            </div>
+      </a>
+      <a href="/me.html">
+         <div class="tile">
+               <img src="images/me.png" />
+               Me
+            </div>
+      </a>
+     
+   </div>
+</body>
+
+</html>

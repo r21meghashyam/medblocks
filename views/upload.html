@@ -1,0 +1,111 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello World!</title>
+   <style>
+      body {
+         font-family: fantasy;
+         margin: 0px;
+         background: #ccc;
+      }
+
+      .profileContainer {
+         display: flex;
+         height: 100vh;
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+      }
+
+      .header {
+         background: #999;
+         color: #fff;
+         font-size: 3em;
+         text-align: center;
+         padding: 10px;
+      }
+
+      .profile {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         background: #bbb;
+         padding: 20px;
+         margin: 20px;
+         transition: background-color 0.5s;
+         color: #fff;
+      }
+
+      .profile img {
+         width: 200px;
+      }
+
+      a {
+         color: #fff;
+         text-decoration: none;
+      }
+
+      form div {
+         padding: 20px;
+      }
+
+      input,
+      textarea {
+         width: 100%;
+         font-size: 20px;
+         padding: 10px;
+         background-color: #ccc;
+         border: none;
+         outline: none;
+         color: #fff;
+      }
+
+      button {
+         padding: 20px;
+         font-size: 1.5em;
+         margin: 20;
+         background: #999;
+         border: 0px;
+         border-radius: 5px;
+         color: #fff;
+         outline: none;
+      }
+   </style>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+   <script src="js/peer.js"></script>
+   <script src="js/firebase-config.js"></script><script src="js/script.js"></script>
+
+</head>
+
+<body>
+   <div class="header">
+      <a href="/">Medblocks</a>
+   </div>
+   <div class="profileContainer">
+      <div class="profile">
+         <h1>Upload File</h1>
+         <form method="post" encType="multipart/form-data">
+            <div>
+               Choose file:
+               <input type="file" name="file">
+            </div>
+            <div>
+               Title:
+               <input type="text" name="title">
+            </div>
+            <div>
+               Description:
+               <textarea name="description" placeholder="description"></textarea>
+            </div>
+            <div style="text-align: center">
+               <button>Upload</button>
+            </div>
+         </form>
+      </div>
+</body>
+
+</html>

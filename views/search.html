@@ -1,0 +1,235 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <title>Hello World!</title>
+   <style>
+      body {
+         font-family: fantasy;
+         margin: 0px;
+         background: #ccc;
+      }
+
+      .profileContainer {
+         display: flex;
+         
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+      }
+
+      .header {
+         background: #999;
+         color: #fff;
+         font-size: 3em;
+         text-align: center;
+         padding: 10px;
+      }
+
+      .profile {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background: #bbb;
+         padding: 20px;
+         margin: 20px;
+         transition: background-color 0.5s;
+         color: #fff;
+      }
+
+      .profile img {
+         width: 40px;
+      }
+
+      a {
+         color: #fff;
+         text-decoration: none;
+      }
+
+      form div {
+         padding: 20px;
+      }
+
+      input,
+      textarea {
+         min-width: 500px;
+         font-size: 20px;
+         padding: 10px;
+         background-color: #ccc;
+         border: none;
+         outline: none;
+         color: #fff;
+      }
+
+      .tile>img {
+         width: 128px;
+         padding: 20px;
+         transition: transform 0.5s ease-out;
+      }
+
+      .tile:hover {
+         background: #999;
+      }
+
+      .tile:hover>img {
+         transform: scale(1.2, 1.2);
+      }
+
+      .list {
+         display: flex;
+         flex-wrap: wrap;
+         min-height: 50vh;
+         justify-content: center;
+         align-items: center;
+         flex-direction: row;
+         font-size: 20px;
+
+      }
+
+      .tile {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .tile {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         background-color: #bbb;
+         padding: 20px;
+         margin: 20px;
+         transition: background-color 0.5s;
+         color: #fff;
+         cursor: pointer;
+      }
+      .options{
+         padding-top:20px;
+      }
+      .options img {
+         width: 32px;
+         padding: 0px 20px;
+         transition: transform 0.5s;
+      }
+
+      .options img:hover {
+         transform: scale(1.2, 1.2);
+      }
+
+      small {
+         font-size: 10px;
+         color: #ddd;
+      }
+   </style>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+   <script src="js/peer.js"></script>
+   <script src="js/firebase-config.js"></script><script src="js/script.js"></script>
+</head>
+
+<body>
+   <div class="header">
+      <a href="/">Medblocks</a>
+   </div>
+   <div class="profileContainer">
+      <div class="profile">
+         <input type="search" placeholder="Enter aadhar number" name="aadharNumber" />
+         <button><img src="images/search.png"></button>
+      
+      </div>
+   </div>
+   <div class="list">
+      </div>
+      <div id="onNoFiles"></div>
+      <script>
+         const main = async () => {
+            let list = document.querySelector('.list');
+            Array.from(list.children).forEach(elem => elem.remove())
+            let aadharNumber = document.querySelector("input").value;
+            let files = await(await fetch("/search/" + aadharNumber)).json();
+            document.querySelector("#onNoFiles").innerHTML = files.length ? "" : "No files";
+            files.forEach(file => {
+   
+               let tile = `
+               <div class="tile">
+               
+                  <img src="images/file.png" />
+                  ${file.title}
+                  <small>${file.size} bytes</small>
+              
+               <div class="options">
+                     <a href="/request/${file.permission}/${file.hash}" title="Ask Permission"><img src="images/ask.png" /></a>
+                    
+               </div>
+            </div>
+               `;
+               document.querySelector('.list').innerHTML+=tile;
+            });
+            if(files.length==0)
+               document.querySelector('.list').innerHTML=`<div class="tile">No files</div>`;
+         }
+         document.querySelector('button').addEventListener('click', main);
+   
+      </script>
+  
+   <!--<script>
+      const call = async () => {
+         let tbody = document.querySelector('tbody');
+         Array.from(tbody.children).forEach(elem => elem.remove())
+         let aadharNumber = document.querySelector("input").value;
+         let response = await fetch("/search/" + aadharNumber);
+
+         let files = await response.json();
+
+         document.querySelector("#onNoFiles").innerHTML = files.length ? "" : "No files";
+         files.forEach(file => {
+            let tr = document.createElement('tr');
+            let td, text;
+            td = document.createElement('td');
+            text = document.createTextNode(file.title);
+            td.append(text);
+            tr.append(td);
+
+            td = document.createElement('td');
+            text = document.createTextNode(file.description);
+            td.append(text);
+            tr.append(td);
+
+            td = document.createElement('td');
+            text = document.createTextNode(file.hash);
+            td.append(text);
+            tr.append(td);
+
+            td = document.createElement('td');
+            text = document.createTextNode(file.size + " bytes");
+            td.append(text);
+            tr.append(td);
+
+            td = document.createElement('td');
+            text = document.createTextNode(new Date(file.date).toString());
+            td.append(text);
+            tr.append(td);
+
+            td = document.createElement('td');
+            a = document.createElement('a');
+            a.href = "/request/" + file.permission + "/" + file.hash;
+            text = document.createTextNode("Ask Permission");
+            a.appendChild(text);
+            td.appendChild(a);
+
+            tr.appendChild(td);
+
+            document.querySelector("tbody").appendChild(tr);
+
+
+         })
+      }
+      document.querySelector('button').addEventListener('click', call);
+   </script>-->
+   </div>
+</body>
+
+</html>

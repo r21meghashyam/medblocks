@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <style>
+        body {
+            font-family: fantasy;
+            margin: 0px;
+            background: #ccc;
+        }
+
+        .profileContainer {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            font-size: 20px;
+        }
+
+        .header {
+            background: #999;
+            color: #fff;
+            font-size: 3em;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #bbb;
+            padding: 20px;
+            margin: 20px;
+            transition: background-color 0.5s;
+            color:#fff;
+        }
+        .profile img{
+            width: 200px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+    <script src="js/peer.js"></script>
+    <script src="js/firebase-config.js"></script><script src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="/">Medblocks</a>
+    </div>
+    <div class="profileContainer">
+        <div class="profile">
+            <img src="/images/me.png"/>
+            <h4>Aadhar Number:</h4>
+            <h1>...</h1>
+        </div>
+    </div>
+
+    </div>
+    <script>
+    const main=async()=>{
+        let user = await (await fetch("/me")).text();
+        document.querySelector("h1").innerHTML=user;
+    }
+    main();
+    </script>
+</body>
+
+</html>

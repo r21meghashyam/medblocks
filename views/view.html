@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <style>
+        body {
+            font-family: fantasy;
+            margin: 0px;
+            background: #ccc;
+        }
+
+        .profileContainer {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            font-size: 20px;
+        }
+
+        .header {
+            background: #999;
+            color: #fff;
+            font-size: 3em;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #bbb;
+            padding: 20px;
+            margin: 20px;
+            transition: background-color 0.5s;
+            color: #fff;
+        }
+
+        .profile img {
+            width: 200px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+        table{
+            color:#555;
+        }
+        td{
+            padding:10px;
+        }
+        .options img {
+         width: 64px;
+         padding: 0px 20px;
+         transition: transform 0.5s;
+      }
+
+      .options img:hover {
+         transform: scale(1.2, 1.2);
+      }
+      .options a{
+          display: inline-flex;
+          flex-direction: column;
+          padding:0px 20px;
+      }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+    <script src="/js/peer.js"></script>
+    <script src="/js/script.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="/">Medblocks</a>
+    </div>
+    <div class="profileContainer">
+        <div class="profile">
+            <img src="/images/file.png" />
+            <h2>...</h2>
+            <table>
+                <tr>
+                            <td>Size:</td>
+                            <td id="size">...</td>
+                        </tr>
+                <tr>
+                    <td>Author:</td>
+                    <td id="author">...</td>
+                </tr>
+                <tr>
+                        <td>Date:</td>
+                        <td id="date">...</td>
+                    </tr>
+                
+            </table>
+            <div class="options">
+                <a href="" id="download"><img src="/images/download.png">Download</a>
+                <a href="" id="send"><img src="/images/send.png">Send</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const main = async () => {
+            let hash = window.location.pathname.split('/')[2];
+            console.log(hash);
+            let files = await (await fetch("/api/list")).json();
+            let file = files.find(file => file.hash = hash);
+            document.querySelector("h2").innerHTML = file.title;
+            document.querySelector("#size").innerHTML = file.size + " bytes";
+            document.querySelector("#size").innerHTML = file.size + " bytes";
+            document.querySelector("#author").innerHTML = file.author;
+            document.querySelector("#date").innerHTML = new Date(file.date);
+            document.querySelector("#download").href = "/download/"+file.hash;
+            document.querySelector("#send").href = "/send/"+file.hash;
+        }
+        main();
+    </script>
+</body>
+
+</html>

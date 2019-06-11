@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "ipfs-api": "^26.1.2"
+  }
+}
